@@ -61,30 +61,33 @@
   height: 900px;
   margin-left: auto;
   margin-right: auto;
+  min-height: 300px;
+  width: 585px;
 }
 
 .port-inner-container {
-  width: max-content;
-  margin-top: 20%;
+  margin-top: 32%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .port-list {
   display: flex;
+  flex-wrap: wrap;
   list-style-type: none;
 }
 
 .port-list .port {
+  width: max-content;
   display: block;
   width: 110px;
   color: white;
   text-align: center;
   padding: 10px;
   font-size: 17px;
-
   margin-right: 15px;
   cursor: pointer;
+  margin-top: 28px;
 }
 
 .port:nth-child(even) {
@@ -133,24 +136,6 @@
 }
 
 /* Wave classes */
-@keyframes splash {
-  0% {
-    margin-top: -300px;
-  }
-  100% {
-    margin-top: -360px;
-  }
-}
-
-@-webkit-keyframes splash {
-  0% {
-    margin-top: -300px;
-  }
-  100% {
-    margin-top: -360px;
-  }
-}
-
 .wave {
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
     repeat-x;

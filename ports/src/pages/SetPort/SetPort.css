@@ -32,4 +32,9 @@
 .port-dropdown {
   display: block !important;
   margin-bottom: 14px !important;
+  margin-right: 14px;
+}
+
+.set-port-container {
+  display: flex;
 }

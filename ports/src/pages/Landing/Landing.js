@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./Landing.css";
 import logo from "../../assets/propforce-white.png";
 import wave from "../../assets/wave.png";
-import { Layout, Modal } from "antd";
+import { Layout, Modal, Popover } from "antd";
 import "antd/dist/antd.css";
 import { PlusOutlined } from "@ant-design/icons";
 import SetPort from "../SetPort/SetPort";
@@ -14,6 +14,8 @@ function Landing() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [ports, setPorts] = useState([]);
+  const [activePort, setActivePort] = useState(null);
+  const [activeUser, setActiveUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
@@ -37,11 +39,35 @@ function Landing() {
       );
   };
 
+  const updatePort = (port) => {
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(port),
+    };
+
+    fetch(`${config.url}/api/port`, requestOptions)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setActivePort(null);
+          setActiveUser(null);
+          fetchPorts();
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+  };
+
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
+    updatePort({ _id: activePort, name: activeUser });
     setIsModalVisible(false);
   };
 
@@ -64,21 +90,36 @@ function Landing() {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <SetPort ports={ports}></SetPort>
+          <SetPort
+            ports={ports}
+            setActivePort={setActivePort}
+            setActiveUser={setActiveUser}
+          ></SetPort>
         </Modal>
       </Header>
       <Content>
         <div className="port-container">
           <div className="port-inner-container">
             <ul className="port-list">
-              {ports.map((item) => (
-                <li
-                  className={`port ${item.user ? "occupied" : "free"}`}
-                  key={item.id}
-                >
-                  {item.name} {item.price}
-                </li>
-              ))}
+              {ports.map((item) =>
+                item.user ? (
+                  <Popover content={item.user.name}>
+                    <li
+                      className={`port ${item.user ? "occupied" : "free"}`}
+                      key={item.id}
+                    >
+                      {item.name} {item.price}
+                    </li>
+                  </Popover>
+                ) : (
+                  <li
+                    className={`port ${item.user ? "occupied" : "free"}`}
+                    key={item.id}
+                  >
+                    {item.name} {item.price}
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>

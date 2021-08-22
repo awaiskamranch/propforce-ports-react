@@ -6,7 +6,7 @@ import { config } from "../../constants";
 
 const { Option } = Select;
 
-function SetPort({ ports }) {
+function SetPort({ ports, setActivePort, setActiveUser }) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [users, setUsers] = useState([]);
@@ -32,20 +32,29 @@ function SetPort({ ports }) {
       );
   };
 
+  function handleNameChange(userName) {
+    setActiveUser(userName);
+  }
+
+  function handlePortChange(portId) {
+    setActivePort(portId);
+  }
+
   return (
-    <React.Fragment>
+    <div class="set-port-container">
       <Select
         showSearch
         style={{ width: 200 }}
         placeholder="Select Your Name"
         optionFilterProp="children"
         className="port-dropdown"
+        onChange={handleNameChange}
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
         {users.map((user) => (
-          <Option key={user._id} value={user._id}>
+          <Option key={user._id} value={user.name}>
             {user.name}
           </Option>
         ))}
@@ -57,6 +66,7 @@ function SetPort({ ports }) {
         placeholder="Select the port"
         optionFilterProp="children"
         className="port-dropdown"
+        onChange={handlePortChange}
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
@@ -67,7 +77,7 @@ function SetPort({ ports }) {
           </Option>
         ))}
       </Select>
-    </React.Fragment>
+    </div>
   );
 }
 

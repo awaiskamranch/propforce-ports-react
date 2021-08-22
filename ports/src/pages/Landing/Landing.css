@@ -1,0 +1,67 @@
+.ant-btn-primary {
+  background: #2cb270 !important;
+  border-color: #2cb270 !important;
+  outline: #2cb270 !important;
+}
+
+.ant-layout-header {
+  display: flex;
+  padding-top: 8px;
+  justify-content: space-between;
+  background: #2cb270 !important;
+  padding-top: 10px !important;
+}
+
+.ant-layout-content {
+  background: white !important;
+  padding: 10px !important;
+}
+
+.ant-btn:hover,
+.ant-btn:focus {
+  border-color: #2cb270 !important;
+  color: #2cb270 !important;
+}
+
+.ant-select-selector:hover,
+.ant-select-selector:active {
+  border-color: #2cb270 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+.ant-select-selector {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #2cb270 !important;
+  box-shadow: none !important;
+}
+
+.ant-select-item-option-selected {
+  background: #caefdc !important;
+}
+
+.ant-btn:hover > span {
+  color: #2cb270 !important;
+}
+
+.logo {
+  width: 45px;
+  height: 45px;
+}
+
+.add-icon {
+  font-size: 32px;
+  cursor: pointer;
+  color: white !important;
+  position: relative;
+  top: 8px;
+}
+
+.port-dropdown {
+  display: block !important;
+  margin-bottom: 14px !important;
+}

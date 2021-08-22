@@ -4,7 +4,7 @@ import logo from "../../assets/propforce-white.png";
 import wave from "../../assets/wave.png";
 import { Layout, Modal, Popover } from "antd";
 import "antd/dist/antd.css";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import SetPort from "../SetPort/SetPort";
 import { config } from "../../constants";
 
@@ -27,7 +27,6 @@ function Landing() {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result);
           setIsLoaded(true);
           setPorts(result);
         },
@@ -51,8 +50,26 @@ function Landing() {
       .then(
         (result) => {
           setIsLoaded(true);
-          setActivePort(null);
-          setActiveUser(null);
+          fetchPorts();
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+  };
+
+  const removePortUser = (portId) => {
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ _id: portId, user: null }),
+    };
+    fetch(`${config.url}/api/port`, requestOptions)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
           fetchPorts();
         },
         (error) => {
@@ -102,29 +119,35 @@ function Landing() {
           <div className="port-inner-container">
             <ul className="port-list">
               {ports.map((item) =>
-                item.user ? (
+                item.user && item.user.name ? (
                   <Popover content={item.user.name}>
                     <li
                       className={`port ${item.user ? "occupied" : "free"}`}
-                      key={item.id}
+                      key={item._id}
                     >
-                      {item.name} {item.price}
+                      {item.name}
+                      <CloseCircleOutlined
+                        onClick={() => removePortUser(item._id)}
+                        className="remove-icon"
+                      />
                     </li>
                   </Popover>
                 ) : (
                   <li
-                    className={`port ${item.user ? "occupied" : "free"}`}
-                    key={item.id}
+                    className={`port ${
+                      item.user && item.user.name ? "occupied" : "free"
+                    }`}
+                    key={item._id}
                   >
-                    {item.name} {item.price}
+                    {item.name}
                   </li>
                 )
               )}
             </ul>
           </div>
         </div>
-        <div class="wave"></div>
-        <div class="wave"></div>
+        <div className="wave"></div>
+        <div className="wave"></div>
       </Content>
       <Footer>
         <div className="footerTitle">Propforce © 2021</div>

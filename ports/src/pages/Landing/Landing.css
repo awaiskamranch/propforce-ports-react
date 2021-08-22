@@ -40,6 +40,11 @@
   top: 8px;
 }
 
+.remove-icon {
+  color: white !important;
+  margin-left: 5px;
+}
+
 .ant-layout-footer {
   height: 30px;
   padding: 0px !important;

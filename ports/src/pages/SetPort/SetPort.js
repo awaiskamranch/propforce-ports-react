@@ -52,6 +52,7 @@ function SetPort({ ports, setActivePort, setActiveUser }) {
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
+        allowClear
       >
         {users.map((user) => (
           <Option key={user._id} value={user.name}>
@@ -70,6 +71,7 @@ function SetPort({ ports, setActivePort, setActiveUser }) {
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
+        allowClear
       >
         {ports.map((port) => (
           <Option key={port._id} value={port._id}>

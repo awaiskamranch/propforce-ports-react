@@ -1,0 +1,35 @@
+.ant-btn:hover,
+.ant-btn:focus {
+  border-color: #2cb270 !important;
+  color: #2cb270 !important;
+}
+
+.ant-select-selector:hover,
+.ant-select-selector:active {
+  border-color: #2cb270 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+.ant-select-selector {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #2cb270 !important;
+  box-shadow: none !important;
+}
+
+.ant-select-item-option-selected {
+  background: #caefdc !important;
+}
+
+.ant-btn:hover > span {
+  color: #2cb270 !important;
+}
+
+.port-dropdown {
+  display: block !important;
+  margin-bottom: 14px !important;
+}

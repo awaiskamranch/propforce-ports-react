@@ -13,39 +13,18 @@
 }
 
 .ant-layout-content {
-  background: white !important;
-  padding: 10px !important;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 254, 234, 1) 0%,
+    rgba(255, 254, 234, 1) 35%,
+    #b7e8eb 100%
+  ) !important;
 }
 
-.ant-btn:hover,
-.ant-btn:focus {
-  border-color: #2cb270 !important;
-  color: #2cb270 !important;
-}
-
-.ant-select-selector:hover,
-.ant-select-selector:active {
-  border-color: #2cb270 !important;
-  box-shadow: none !important;
-  cursor: pointer !important;
-}
-
-.ant-select-selector {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-  border-color: #2cb270 !important;
-  box-shadow: none !important;
-}
-
-.ant-select-item-option-selected {
-  background: #caefdc !important;
-}
-
-.ant-btn:hover > span {
-  color: #2cb270 !important;
+.title {
+  line-height: 52px;
+  color: white;
+  display: flex;
 }
 
 .logo {
@@ -61,7 +40,150 @@
   top: 8px;
 }
 
-.port-dropdown {
-  display: block !important;
-  margin-bottom: 14px !important;
+.ant-layout-footer {
+  height: 30px;
+  padding: 0px !important;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.footerTitle {
+  width: 100%;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+}
+
+/* Port classes */
+.port-container {
+  padding: 10px;
+  height: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.port-inner-container {
+  width: max-content;
+  margin-top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.port-list {
+  display: flex;
+  list-style-type: none;
+}
+
+.port-list .port {
+  display: block;
+  width: 110px;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 17px;
+
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.port:nth-child(even) {
+  animation: float 3.5s ease-in-out infinite;
+}
+.port:nth-child(odd) {
+  animation: float-wave 4.5s ease-in-out infinite;
+}
+
+.free {
+  background-color: #2cb270;
+}
+
+.occupied {
+  background-color: #ff585a;
+}
+
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.25);
+    transform: translatey(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0);
+    transform: translatey(-8px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.25);
+    transform: translatey(0px);
+  }
+}
+
+@keyframes float-wave {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.25);
+    transform: translatey(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0);
+    transform: translatey(-10px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.25);
+    transform: translatey(0px);
+  }
+}
+
+/* Wave classes */
+@keyframes splash {
+  0% {
+    margin-top: -300px;
+  }
+  100% {
+    margin-top: -360px;
+  }
+}
+
+@-webkit-keyframes splash {
+  0% {
+    margin-top: -300px;
+  }
+  100% {
+    margin-top: -360px;
+  }
+}
+
+.wave {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
+    repeat-x;
+  position: absolute;
+  bottom: 0px;
+  width: 6400px;
+  height: 198px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+  bottom: 10px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 7s ease -1.25s infinite;
+  opacity: 1;
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+
+@keyframes swell {
+  0%,
+  100% {
+    transform: translate3d(0, -25px, 0);
+  }
+  50% {
+    transform: translate3d(0, 5px, 0);
+  }
 }

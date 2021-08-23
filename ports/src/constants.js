@@ -1,5 +1,5 @@
 const production = {
-  url: "https://myapp.herokuapp.com",
+  url: "https://propforce-ports-node.herokuapp.com/",
 };
 
 const development = {

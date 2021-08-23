@@ -4,6 +4,14 @@
   outline: #2cb270 !important;
 }
 
+.ant-btn-primary span {
+  color: white !important;
+}
+
+.ant-btn-primary:hover span {
+  color: white !important;
+}
+
 .ant-layout-header {
   display: flex;
   padding-top: 8px;

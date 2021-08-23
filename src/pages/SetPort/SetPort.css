@@ -25,10 +25,6 @@
   background: #caefdc !important;
 }
 
-.ant-btn:hover > span {
-  color: #2cb270 !important;
-}
-
 .port-dropdown {
   display: block !important;
   margin-bottom: 14px !important;

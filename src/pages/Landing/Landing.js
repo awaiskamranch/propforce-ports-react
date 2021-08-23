@@ -4,7 +4,11 @@ import logo from "../../assets/propforce-white.png";
 import wave from "../../assets/wave.png";
 import { Layout, Modal, Popover } from "antd";
 import "antd/dist/antd.css";
-import { PlusOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import SetPort from "../SetPort/SetPort";
 import { config } from "../../constants";
 
@@ -17,6 +21,7 @@ function Landing() {
   const [activePort, setActivePort] = useState(null);
   const [activeUser, setActiveUser] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { confirm } = Modal;
 
   useEffect(() => {
     fetchPorts();
@@ -59,24 +64,23 @@ function Landing() {
       );
   };
 
-  const removePortUser = (portId) => {
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ _id: portId, user: null }),
-    };
-    fetch(`${config.url}/api/port`, requestOptions)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          fetchPorts();
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+  const removePortUser = (port) => {
+    confirm({
+      icon: <ExclamationCircleOutlined />,
+      content: (
+        <div className="popup-title">
+          <div>Are you sure you want to free the port?</div>
+          <div>
+            Port <b>{port.name}</b> is currently occupied by{" "}
+            <b>{port.user.name}</b>
+          </div>
+        </div>
+      ),
+      onOk() {
+        updatePort({ _id: port._id, user: null });
+      },
+      onCancel() {},
+    });
   };
 
   const showModal = () => {
@@ -127,7 +131,7 @@ function Landing() {
                     >
                       {item.name}
                       <CloseCircleOutlined
-                        onClick={() => removePortUser(item._id)}
+                        onClick={() => removePortUser(item)}
                         className="remove-icon"
                       />
                     </li>

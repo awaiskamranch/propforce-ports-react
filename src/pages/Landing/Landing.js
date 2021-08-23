@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Landing.css";
 import logo from "../../assets/propforce-white.png";
-import wave from "../../assets/wave.png";
+import loader from "../../assets/loader.png";
 import { Layout, Modal, Popover } from "antd";
 import "antd/dist/antd.css";
 import {
@@ -120,35 +120,38 @@ function Landing() {
       </Header>
       <Content>
         <div className="port-container">
-          <div className="port-inner-container">
-            <ul className="port-list">
-              {ports.map((item) =>
-                item.user && item.user.name ? (
-                  <Popover content={item.user.name}>
+          {isLoaded && (
+            <div className="port-inner-container">
+              <ul className="port-list">
+                {ports.map((item) =>
+                  item.user && item.user.name ? (
+                    <Popover content={item.user.name}>
+                      <li
+                        className={`port ${item.user ? "occupied" : "free"}`}
+                        key={item._id}
+                      >
+                        {item.name}
+                        <CloseCircleOutlined
+                          onClick={() => removePortUser(item)}
+                          className="remove-icon"
+                        />
+                      </li>
+                    </Popover>
+                  ) : (
                     <li
-                      className={`port ${item.user ? "occupied" : "free"}`}
+                      className={`port ${
+                        item.user && item.user.name ? "occupied" : "free"
+                      }`}
                       key={item._id}
                     >
                       {item.name}
-                      <CloseCircleOutlined
-                        onClick={() => removePortUser(item)}
-                        className="remove-icon"
-                      />
                     </li>
-                  </Popover>
-                ) : (
-                  <li
-                    className={`port ${
-                      item.user && item.user.name ? "occupied" : "free"
-                    }`}
-                    key={item._id}
-                  >
-                    {item.name}
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
+                  )
+                )}
+              </ul>
+            </div>
+          )}
+          {!isLoaded && <img src={loader} className="loading" />}
         </div>
         <div className="wave"></div>
         <div className="wave"></div>

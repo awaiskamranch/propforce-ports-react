@@ -68,6 +68,15 @@
   line-height: 30px;
 }
 
+.loading {
+  width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40%;
+  animation: swell 4.5s ease-in-out infinite;
+}
+
 /* Port classes */
 .port-container {
   padding: 10px;
